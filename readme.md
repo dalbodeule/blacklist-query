@@ -2,7 +2,7 @@
 역할: 마인크래프트 유저의 UUID나 ip가 차단되어있나 확인합니다.
 
 ## 현재 버전:
-V1.2.2
+V1.2.4
 
 ## 차단되어 있는지 확인 하는 곳
 [K-Spam](http://cafe.naver.com/kspam) - IP를 검색합니다.
@@ -204,7 +204,20 @@ query.nickname_to_uuid('trusty_people', function(err, res) {
 null
 ```
 
+## 블랙리스트 추가
+
+블랙리스트 추가는 [Github Issues](https://github.com/trustypeople/blacklist-query/issues) 에 다음의 내용을 담아 요청해 주실 경우 다음 버전에 추가해드립니다.
+
+※ 단 API 가 아닐 경우 받지 않습니다.
+
+```검색 유형: (IP, UUID, Nickname 3개 항목중 선택, 다중선택 가능)
+검색 URL: (IP, UUID, Nickname 중 선택한 항목을 검색할 URL을 입력해주세요.)
+```
+
 ## 업데이트 내역
+
+### 1.2.4
+변수 구조 일부 변경, readme.md 파일 수정, Git Repository 추가에 따른 package.json 파일 수정.
 
 ### 1.2.2
 readme.md 파일 오타 수정.

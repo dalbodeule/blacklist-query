@@ -16,7 +16,7 @@
     "node": "<3.10.0"
   },
   "main": "main.js",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "scripts": {
     "test": "node test.js --trace-sync-io"
   },
@@ -25,5 +25,13 @@
   "keyworld": "minecraft",
   "keywords": [
     "minecraft"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trustypeople/blacklist-query.git"
+  },
+  "bugs": {
+    "url": "https://github.com/trustypeople/blacklist-query/issues"
+  },
+  "hoempage": "https://github.com/trustypeople/blacklist-query#readme"
 }
