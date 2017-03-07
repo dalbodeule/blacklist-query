@@ -1,0 +1,29 @@
+{
+  "name": "blacklist-query",
+  "author": "trusty_people <jioo0224@naver.com>",
+  "files": [
+    "main.js",
+    "test.js",
+    "package.json",
+    "readme.md"
+  ],
+  "dependencies": {
+    "async": "^2.1.4",
+    "moment": "^2.17.1",
+    "request": "^2.79.0"
+  },
+  "engines": {
+    "node": "<3.10.0"
+  },
+  "main": "main.js",
+  "version": "1.2.2",
+  "scripts": {
+    "test": "node test.js --trace-sync-io"
+  },
+  "license": "MIT",
+  "description": "설정된 블랙리스트에서 ip, uuid, 닉네임 을 검색합니다.",
+  "keyworld": "minecraft",
+  "keywords": [
+    "minecraft"
+  ]
+}
