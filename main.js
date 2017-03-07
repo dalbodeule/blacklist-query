@@ -1,4 +1,4 @@
-var version = 'V1.2.4'
+var version = 'V1.2.5'
 var async = require('async'), request = require('request');
 
 var query = function(url, timeout, callback, success_fun, fail_fun) {
