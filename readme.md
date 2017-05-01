@@ -252,7 +252,7 @@ Script Test 명령어는 다음과 같습니다.
 ## 업데이트 내역
 
 ### 1.3.0
-작동구조 변경, Promise 패턴 적용, readme.md 파일 수정
+작동 구조 변경, Promise 패턴 적용, readme.md 파일 수정
 
 ### 1.2.5
 readme.md 파일 오타 수정.
