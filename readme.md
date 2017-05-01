@@ -15,16 +15,16 @@ MIT
 ## 의존성 패키지
 1. async (2.1.4 이상)
 2. request (2.79.1 이상)
-3. moment(test.js 작동시간 확인용으로 사용) (2.17.1 이상)
-4. node.js (3.10 이상)
+4. node.js (6.9.2 이상)
 
 ## 모듈 로드
 
 ```javascript
-var query = require('blacklist-query');
+let query = require('blacklist-query');
 ```
+## callback 방식
 
-## ip query
+### ip query
 
 ```javascript
 query.ip(ip address(string)[, timeout(int)], callback(function));
@@ -58,15 +58,19 @@ query.ip('127.0.0.1', function(err, res) {
 반환은 다음과 같이 됩니다.
 
 ```javascript
-{ timeout: 3 /* timeout 인자 또는 기본값 */,
-  query: '127.0.0.1' /* 검색한 ip address */,
-  response: { 'k-spam': 'fail', 'mc-blacklist': false } /* 검색 결과를 반환합니다. */
+{ timeout: 3000 /* timeout 인자 또는 기본값 */,
+  query: '127.0.0.1'/* 검색한 ip address */,
+  response: /* 검색 결과를 반환합니다. */
+   { 'mc-blacklist': { status: false },
+     'k-spam': { status: 'fail', error: [Object] }
+   }
 }
 ```
 
-결과가 `true` 일 경우 블랙리스트에 등록, `false` 일 경우 블랙리스트에 미등록, `'fail'` 일 경우 블랙리스트 서버의 문제로 검색에 실패한 경우입니다.
+`status`가 `true` 일 경우 블랙리스트에 등록, `false` 일 경우 블랙리스트에 미등록, `error` 일 경우 블랙리스트 에러로 불러오지 못한 경우이며, body 가 반환됩니다.
+`'fail'` 일 경우 블랙리스트 서버의 문제로 검색에 실패한 경우이며, Javascript Error 로그가 반환됩니다.
 
-### uuid query
+#### uuid query
 
 ```javascript
 query.uuid(uuid(string)[, timeout(int)], callback(function));
@@ -103,15 +107,19 @@ query.uuid('2e45712e3747428094cb1d39fe7ee434', function(err, res) {
 반환은 다음과 같이 됩니다.
 
 ```javascript
-{ timeout: 3 /* timeout 인자 또는 기본값 */,
-  query: '2e45712e3747428094cb1d39fe7ee434' /* 검색한 UUID */,
-  response: { 'mc-blacklist': false } /* 검색 결과를 반환합니다. */
+{ timeout: 3000 /* timeout 인자 또는 기본값 */,
+  query: '2e45712e-3747-4280-94cb-1d39fe7ee434' /* 검색한 UUID */,
+  response: /* 검색 결과를 반환합니다. */
+   { 'mc-blacklist': { status: false }}
 }
 ```
 
+`status`가 `true` 일 경우 블랙리스트에 등록, `false` 일 경우 블랙리스트에 미등록, `error` 일 경우 블랙리스트 에러로 불러오지 못한 경우이며, body 가 반환됩니다.
+`'fail'` 일 경우 블랙리스트 서버의 문제로 검색에 실패한 경우이며, Javascript Error 로그가 반환됩니다.
+
 결과가 `true` 일 경우 블랙리스트에 등록, `false` 일 경우 블랙리스트에 미등록, `'fail'` 일 경우 블랙리스트 서버의 문제로 검색에 실패한 경우입니다.
 
-## nickname query
+### nickname query
 
 ```javascript
 query.nickname(nickname(string)[, timeout(int)], callback(function));
@@ -145,15 +153,17 @@ query.ip('127.0.0.1', function(err, res) {
 반환은 다음과 같이 됩니다.
 
 ```javascript
-{ timeout: 3 /* timeout 인자 또는 기본값 */,
-  query: 'trusty_people' /* 검색한 마인크래프트 닉네임 */,
-  response: { 'mc-blacklist': false } /* 검색 결과를 반환합니다. */
+{ timeout: 3000 /* timeout 인자 또는 기본값 */,
+  query: 'trusty_people' /* 검색한 Nickname */,
+  response: /* 검색 결과를 반환합니다. */
+   { 'mc-blacklist': { status: false }}
 }
 ```
 
-결과가 `true` 일 경우 블랙리스트에 등록, `false` 일 경우 블랙리스트에 미등록, `'fail'` 일 경우 블랙리스트 서버의 문제로 검색에 실패한 경우입니다.
+`status`가 `true` 일 경우 블랙리스트에 등록, `false` 일 경우 블랙리스트에 미등록, `error` 일 경우 블랙리스트 에러로 불러오지 못한 경우이며, body 가 반환됩니다.
+`'fail'` 일 경우 블랙리스트 서버의 문제로 검색에 실패한 경우이며, Javascript Error 로그가 반환됩니다.
 
-## nickname to uuid
+### nickname to uuid
 
 `마인크래프트 닉네임` 을 `UUID` 로 변환하고 싶을 경우 `nickname_to_uuid` 함수를 사용합니다.
 
@@ -186,23 +196,47 @@ query.nickname_to_uuid('trusty_people', function(err, res) {
 });
 ```
 
-만약 닉네임이 존재할 경우, `err` 변수는 `false` 로 설정되며,
-`res` 변수에 `UUID` 가 담겨 전달됩니다. `Full UUID` 가 아닌 `UUID` 가 담겨 전달됩니다.
+반환은 다음과 같이 됩니다.
 
-만약 닉네임이 존재하지 아니할 경우, `err` 변수는 `true` 로 설정되며,
-`res` 변수는 `null` 로 설정됩니다.
-
-만약 에러가 발생할 경우, `err` 변수는 `true` 로 설정되며, `res` 변수에 `Response Body` 가 전달됩니다.
-
-성공시 `res` 변수:
 ```javascript
-'2e45712e3747428094cb1d39fe7ee434'
+{ timeout: 3000 /* timeout 인자 또는 기본값 */,
+  query: 'trusty_people'/* 검색한 Nickname */,
+  response: '2e45712e-3747-4280-94cb-1d39fe7ee434' /* UUID를 반환합니다. */,
+  result: 'success' /* 검색 결과를 반환합니다. */}
 ```
 
-실패시 `res` 변수:
+`result` 가 `'success'` 일 경우 정품 유저이며, `response` 에 `UUID`가 담깁니다. `result` 가 `'fail'` 일 경우 등록되지 않은 닉네임입니다.
+`result` 가 `'error'` 일 경우 API 서버의 문제로 검색에 실패한 경우이며, Javascript Error 로그가 반환됩니다.\
+
+## Promise 패턴
+
+Promise 패턴을 적용 할 경우, 다음과 같이 사용합니다.
+
 ```javascript
-null
+query.nick_pro('trusty_people')
+    .then((result) => {
+        resolve(result);
+    })
+    .catch((error) => {
+        reject(error);
+    });
 ```
+
+Promise 패턴이 적용된 함수는 _pro 가 붙은 함수입니다.
+
+query.nick_pro, query.uuid_pro, query.nick_pro, query.nickname_pro, query.nickname_to_uuid_pro 와 같은 함수입니다.
+
+리턴값은 모두 같습니다.
+
+## Script Test
+
+Script Test 명령어는 다음과 같습니다.
+
+### Async Waterfall
+```npm run test```
+
+### Promise
+```npm run testpro```
 
 ## 블랙리스트 추가
 
@@ -216,6 +250,9 @@ null
 ```
 
 ## 업데이트 내역
+
+### 1.3.0
+작동구조 변경, Promise 패턴 적용, readme.md 파일 수정
 
 ### 1.2.5
 readme.md 파일 오타 수정.

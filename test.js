@@ -1,53 +1,45 @@
-var query = require('./main.js'), moment = require('moment'), timer = function(){}, waterfall = require('async/waterfall');
-timer.prototype = {
-    start: function() {
-        this._time = moment(new Date().getTime());
-    },
-    end: function() {
-        return moment(new Date().getTime()).diff(this._time);
-    }
-};
+let query = require('./main.js'), waterfall = require('async/waterfall');
 
 waterfall([
     function(callback) {
-        var t = new timer;
+        console.time('t1');
         console.log('# testcase 1. ip query start');
-        t.start();
         query.ip('127.0.0.1', function(err, res) {
             if(err) console.log(err);
             console.log(res);
-            console.log('# end: '+t.end()+', testcase 1. ip query');
+            console.timeEnd('t1');
+            console.log('# testcase 1. ip query end');
             callback(null);
         });
     },
     function(callback) {
-        var t = new timer;
+        console.time('t2');
         console.log('# testcase 2. uuid query start');
-        t.start();
         query.uuid('2e45712e3747428094cb1d39fe7ee434', function(err, res) {
             if(err) console.log(err);
             console.log(res);
-            console.log('# end: '+t.end()+', testcase 2. uuid query');
+            console.timeEnd('t2');
+            console.log('# testcase 2. uuid query end');
             callback(null);
         });
     }, function(callback) {
-        var t = new timer;
+        console.time('t3');
         console.log('# testcase 3. nickname query start');
-        t.start();
         query.nick('trusty_people', function(err, res) {
             if(err) console.log(err);
             console.log(res);
-            console.log('# end: '+t.end()+', testcase 3. nick query');
+            console.timeEnd('t3');
+            console.log('# testcase 3. nick query end');
             callback(null);
         });
     }, function(callback) {
-        var t = new timer;
+        console.time('t4');
         console.log('# testcase 4. nickname to uuid start');
-        t.start();
         query.nickname_to_uuid('trusty_people', function(err, res) {
             if(err) console.log(err);
             console.log(res);
-            console.log('# end: '+t.end()+', testcase 4. nickname to uuid');
+            console.timeEnd('t4');
+            console.log('# testcase 4. nickname to uuid end');
             callback(null);
         });
     }
