@@ -1,11 +1,15 @@
 # blacklist-query
+
+![travis-ci.org](https://travis-ci.org/trustypeople/blacklist-query.svg?branch=master)
+
 역할: 마인크래프트 유저의 UUID나 ip가 차단되어있나 확인합니다.
 
 ## 현재 버전:
 V1.2.5
 
 ## 차단되어 있는지 확인 하는 곳
-[K-Spam](http://cafe.naver.com/kspam) - IP를 검색합니다.
+~~[K-Spam](http://cafe.naver.com/kspam) - IP를 검색합니다.~~
+K-Spam 은 미작동하여 주석처리 되었습니다.
 
 [MC-Blacklist](https://mc-blacklist.kr/) - IP, UUID, Nickname 를 검색합니다.
 
@@ -251,6 +255,10 @@ Script Test 명령어는 다음과 같습니다.
 
 ## 업데이트 내역
 
+### 1.3.1
+K-Spam 미작동으로 인한 주석처리, MC-Blacklist API 주소변경, readme.md 파일 수정
+앞으로는 K-Spam 에서 블랙리스트 정보를 가져오지 않습니다.
+
 ### 1.3.0
 작동 구조 변경, Promise 패턴 적용, readme.md 파일 수정
 
@@ -309,4 +317,4 @@ readme.md 파일의 가독성을 조금 높히고, 일부 누락된 부분을 �
 최초 버전
 
 ## 제작자
-[미쁨_trusty(trusty_people)](https://www.npmjs.com/~trusty_people)
+미쁨_trusty(trusty_people)[npmjs](https://www.npmjs.com/~trusty_people) [github](https://github.com/trustypeople)

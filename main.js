@@ -1,5 +1,5 @@
 'use strict';
-let version = 'V1.3.0'
+let version = 'V1.3.1'
 let async = require('async'), request = require('request');
 
 let query = (url, timeout, callback, success_fun, fail_fun) => {
@@ -44,7 +44,7 @@ function query_ip(ip, timeout, callback_fun) {
         callback_fun('not matching ip ruleset', null);
     }
     let servers = {
-        'k-spam': {
+        /*'k-spam': {
             url: 'https://kspam.swiftnode.cloud/mcbanip/community.php?ip='+ip,
             success: (body, callback) => {
                 let result = {
@@ -60,7 +60,7 @@ function query_ip(ip, timeout, callback_fun) {
                 }
                 callback(null, result);
             }
-        },
+        },*/
         'mc-blacklist': {
             url: 'https://mc-blacklist.kr/API/ip/'+ip,
             success: (body, callback) => {
