@@ -1,11 +1,8 @@
 # blacklist-query
 
-![travis-ci.org](https://travis-ci.org/trustypeople/blacklist-query.svg?branch=master)
+![travis-ci.org](https://travis-ci.org/trustypeople/blacklist-query.svg?branch=master)[![npm version](https://badge.fury.io/js/blacklist-query.svg)](https://badge.fury.io/js/blacklist-query)
 
 역할: 마인크래프트 유저의 UUID나 ip가 차단되어있나 확인합니다.
-
-## 현재 버전:
-V1.2.5
 
 ## 차단되어 있는지 확인 하는 곳
 ~~[K-Spam](http://cafe.naver.com/kspam) - IP를 검색합니다.~~
