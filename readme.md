@@ -1,6 +1,6 @@
 # blacklist-query
 
-![travis-ci.org](https://travis-ci.org/trustypeople/blacklist-query.svg?branch=master)[![npm version](https://badge.fury.io/js/blacklist-query.svg)](https://badge.fury.io/js/blacklist-query)
+![[travis-ci.org](https://travis-ci.org/trustypeople/blacklist-query)](https://travis-ci.org/trustypeople/blacklist-query.svg?branch=master) [![npm version](https://badge.fury.io/js/blacklist-query.svg)](https://badge.fury.io/js/blacklist-query)
 
 역할: 마인크래프트 유저의 UUID나 ip가 차단되어있나 확인합니다.
 
