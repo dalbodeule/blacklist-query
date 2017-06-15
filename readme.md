@@ -1,6 +1,6 @@
 # blacklist-query
 
-![[travis-ci.org](https://travis-ci.org/trustypeople/blacklist-query)](https://travis-ci.org/trustypeople/blacklist-query.svg?branch=master) [![npm version](https://badge.fury.io/js/blacklist-query.svg)](https://badge.fury.io/js/blacklist-query)
+![[travis-ci.org](https://travis-ci.org/small-sunshines/blacklist-query)](https://travis-ci.org/small-sunshines/blacklist-query.svg?branch=master) [![npm version](https://badge.fury.io/js/blacklist-query.svg)](https://badge.fury.io/js/blacklist-query)
 
 역할: 마인크래프트 유저의 UUID나 ip가 차단되어있나 확인합니다.
 
@@ -241,7 +241,7 @@ Script Test 명령어는 다음과 같습니다.
 
 ## 블랙리스트 추가
 
-블랙리스트 추가는 [Github Issues](https://github.com/trustypeople/blacklist-query/issues) 에 다음의 내용을 담아 요청해 주실 경우 다음 버전에 추가해드립니다.
+블랙리스트 추가는 [Github Issues](https://github.com/small-sunshines/blacklist-query/issues) 에 다음의 내용을 담아 요청해 주실 경우 다음 버전에 추가해드립니다.
 
 ※ 단 API 가 아닐 경우 받지 않습니다.
 
@@ -251,6 +251,9 @@ Script Test 명령어는 다음과 같습니다.
 ```
 
 ## 업데이트 내역
+
+### 1.3.2
+Github 계정 업데이트 관련 적용
 
 ### 1.3.1
 K-Spam 미작동으로 인한 주석처리, MC-Blacklist API 주소변경, readme.md 파일 수정
