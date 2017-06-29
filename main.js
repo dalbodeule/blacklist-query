@@ -1,5 +1,5 @@
 'use strict';
-let version = 'V1.3.3'
+let version = 'V1.3.4'
 let async = require('async'), request = require('request');
 
 let query = (url, timeout, callback, success_fun, fail_fun) => {

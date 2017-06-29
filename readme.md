@@ -1,6 +1,6 @@
 # blacklist-query
 
-![[travis-ci.org](https://travis-ci.org/small-sunshines/blacklist-query)](https://travis-ci.org/small-sunshines/blacklist-query.svg?branch=master) [![npm version](https://badge.fury.io/js/blacklist-query.svg)](https://badge.fury.io/js/blacklist-query)
+[![Build Status](https://travis-ci.org/small-sunshines/blacklist-query.svg?branch=master)](https://travis-ci.org/small-sunshines/blacklist-query) [![npm version](https://badge.fury.io/js/blacklist-query.svg)](https://badge.fury.io/js/blacklist-query)
 
 역할: 마인크래프트 유저의 UUID나 ip가 차단되어있나 확인합니다.
 
@@ -251,6 +251,12 @@ Script Test 명령어는 다음과 같습니다.
 ```
 
 ## 업데이트 내역
+
+### 1.4.4
+실수로 변경못한 readme.md 가 수정되었으며, 그에 따른 업데이트입니다.
+
+### 1.3.3
+jsdoc 를 적용하였으며, 일부 테스트 케이스를 변경하였습니다. 내부 처리함수가 변경되었습니다.
 
 ### 1.3.2
 Github 계정 업데이트 관련 적용
