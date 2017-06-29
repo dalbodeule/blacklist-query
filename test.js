@@ -15,7 +15,7 @@ waterfall([
     function(callback) {
         console.time('t2');
         console.log('# testcase 2. uuid query start');
-        query.uuid('2e45712e3747428094cb1d39fe7ee434', function(err, res) {
+        query.uuid('069a79f4-44e9-4726-a5be-fca90e38aaf5', function(err, res) {
             if(err) console.log(err);
             console.log(res);
             console.timeEnd('t2');
@@ -25,7 +25,7 @@ waterfall([
     }, function(callback) {
         console.time('t3');
         console.log('# testcase 3. nickname query start');
-        query.nick('trusty_people', function(err, res) {
+        query.nick('Notch', function(err, res) {
             if(err) console.log(err);
             console.log(res);
             console.timeEnd('t3');
@@ -35,7 +35,7 @@ waterfall([
     }, function(callback) {
         console.time('t4');
         console.log('# testcase 4. nickname to uuid start');
-        query.nickname_to_uuid('trusty_people', function(err, res) {
+        query.nickname_to_uuid('Notch', function(err, res) {
             if(err) console.log(err);
             console.log(res);
             console.timeEnd('t4');

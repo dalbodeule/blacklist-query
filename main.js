@@ -1,5 +1,5 @@
 'use strict';
-let version = 'V1.3.1'
+let version = 'V1.3.3'
 let async = require('async'), request = require('request');
 
 let query = (url, timeout, callback, success_fun, fail_fun) => {
@@ -17,21 +17,49 @@ let query = (url, timeout, callback, success_fun, fail_fun) => {
 }
 
 /* ip query start */
+
+/**
+ * 블랙리스트 검색 내용을 반환합니다.
+ * @param {string} ip - 블랙리스트에 질의할 ip 입니다.
+ * @param {number} [timeout=3] - timeout 로 지정할 시간입니다. 단위는 초 입니다. 지정하지 않으면 자동으로 3초로 설정됩니다.
+ * @param {function(Error, object):void} callback - 콜백 함수입니다. 첫번째 인자로 Error 가 반환되며, 두번째 인자로 정보가 반환됩니다.
+ * @returns {void}
+ */
 exports.ip = (ip, timeout, callback) => {
-    query_ip(ip, timeout*1000, callback);
+    if(typeof timeout == 'number' && timeout > 0) {
+        return query_ip(ip, timeout*1000, callback);
+    } else {
+        return query_ip(ip, 3*1000, callback);
+    }
 }
 exports.ip = (ip, callback) => {
-    query_ip(ip, 3*1000, callback);
+    return query_ip(ip, 3*1000, callback);
 }
-exports.ip_pro = (ip, timeout, callback) => {
-    return new Promise((resolve, reject) => {
-        query_ip(ip, timeout*1000, (err, res) => {
-            if(err) reject(err);
-            resolve(res);
+
+/**
+ * 블랙리스트 검색 내용을 반환합니다.
+ * @param {string} ip - 블랙리스트에 질의할 ip 입니다.
+ * @param {number} [timeout=3] - timeout 로 지정할 시간입니다. 단위는 초 입니다. 지정하지 않으면 자동으로 3초로 설정됩니다.
+ * @return {Promise<Response>} - 응답 데이터가 넘어옵니다.
+ */
+exports.ip_pro = (ip, timeout) => {
+    if(typeof timeout == 'number' && timeout > 0) {
+        return new Promise((resolve, reject) => {
+            query_ip(ip, timeout*1000, (err, res) => {
+                if(err) reject(err);
+                resolve(res);
+            });
         });
-    });
-}
-exports.ip_pro = (ip, callback) => {
+    } else {
+        return new Promise((resolve, reject) => {
+            query_ip(ip, 3*1000, (err, res) => {
+                if(err) reject(err);
+                resolve(res);
+            });
+        });
+    }
+}    
+exports.ip_pro = (ip) => {
     return new Promise((resolve, reject) => {
         query_ip(ip, 3*1000, (err, res) => {
             if(err) reject(err);
@@ -39,6 +67,14 @@ exports.ip_pro = (ip, callback) => {
         });
     });
 }
+
+/**
+ * 내부에서 처리용도로 만든 함수입니다.
+ * @private
+ * @param {string} ip - 질의할 ip입니다.
+ * @param {number} timeout - timeout 입니다.
+ * @param {function(Error, object)} callback_fun - 콜백 함수 입니다.
+ */
 function query_ip(ip, timeout, callback_fun) {
     if(/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/.test(ip) == false) {
         callback_fun('not matching ip ruleset', null);
@@ -93,21 +129,49 @@ function query_ip(ip, timeout, callback_fun) {
 /* ip query end */
 
 /* uuid query start */
+
+/**
+ * 블랙리스트 검색 내용을 반환합니다.
+ * @param {string} uuid - 블랙리스트에 질의할 uuid 입니다.
+ * @param {number} [timeout=3] - timeout 로 지정할 시간입니다. 단위는 초 입니다. 지정하지 않으면 자동으로 3초로 설정됩니다.
+ * @param {function(Error, object):void} callback - 콜백 함수입니다. 첫번째 인자로 Error 가 반환되며, 두번째 인자로 정보가 반환됩니다.
+ * @returns {void}
+ */
 exports.uuid = (uuid, timeout, callback) => {
-    query_uuid(uuid, timeout*1000, callback);
+    if(typeof timeout == 'number' && timeout > 0) {
+        return query_uuid(uuid, timeout*1000, callback);
+    } else {
+        return query_uuid(uuid, 3*1000, callback);
+    }
 }
 exports.uuid = (uuid, callback) => {
-    query_uuid(uuid, 3*1000, callback);
+    return query_uuid(uuid, 3*1000, callback);
 }
-exports.uuid_pro = (uuid, timeout, callback) => {
-    return new Promise((resolve, reject) => {
-        query_uuid(uuid, timeout*1000, (err, res) => {
-            if(err) reject(err);
-            resolve(res);
+
+/**
+ * 블랙리스트 검색 내용을 반환합니다.
+ * @param {string} uuid - 블랙리스트에 질의할 uuid 입니다.
+ * @param {number} [timeout=3] - timeout 로 지정할 시간입니다. 단위는 초 입니다. 지정하지 않으면 자동으로 3초로 설정됩니다.
+ * @return {Promise<Response>} - 응답 데이터가 넘어옵니다.
+ */
+exports.uuid_pro = (uuid, timeout) => {
+    if(typeof timeout == 'number' && timeout > 0) {
+        return new Promise((resolve, reject) => {
+            query_uuid(uuid, timeout*1000, (err, res) => {
+                if(err) reject(err);
+                resolve(res);
+            });
         });
-    });
+    } else {
+        return new Promise((resolve, reject) => {
+            query_uuid(uuid, 3*1000, (err, res) => {
+                if(err) reject(err);
+                resolve(res);
+            });
+        });
+    }
 }
-exports.uuid_pro = (uuid, callback) => {
+exports.uuid_pro = (uuid) => {
     return new Promise((resolve, reject) => {
         query_uuid(uuid, 3*1000, (err, res) => {
             if(err) reject(err);
@@ -115,6 +179,14 @@ exports.uuid_pro = (uuid, callback) => {
         });
     });
 }
+
+/**
+ * 내부에서 처리용도로 만든 함수입니다.
+ * @private
+ * @param {string} uuid - 질의할 uuid입니다.
+ * @param {number} timeout - timeout 입니다.
+ * @param {function(Error, object)} callback_fun - 콜백 함수 입니다.
+ */
 function query_uuid(uuid, timeout, callback_fun) {
     if(/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/.test(uuid) == false) {
         if(/[a-z0-9]{32}$/.test(uuid) == true) {
@@ -157,27 +229,66 @@ function query_uuid(uuid, timeout, callback_fun) {
 /* uuid query end */
 
 /* nickname query start */
+
+/**
+ * 블랙리스트 검색 내용을 반환합니다.
+ * @param {string} nick - 블랙리스트에 질의할 닉네임 입니다.
+ * @param {number} [timeout=3] - timeout 로 지정할 시간입니다. 단위는 초 입니다. 지정하지 않으면 자동으로 3초로 설정됩니다.
+ * @param {function(Error, object):void} callback - 콜백 함수입니다. 첫번째 인자로 Error 가 반환되며, 두번째 인자로 정보가 반환됩니다.
+ * @returns {void}
+ */
 exports.nick = (nick, timeout, callback) => {
-    query_nick(nick, timeout*1000, callback);
+    if(typeof timeout == 'number' && timeout > 0) {
+        query_nick(nick, timeout*1000, callback);
+    } else {
+        query_nick(nick, 3*1000, callback);
+    }
 }
 exports.nick = (nick, callback) => {
     query_nick(nick, 3*1000, callback);
 }
+/**
+ * 블랙리스트 검색 내용을 반환합니다.
+ * @param {string} nick - 블랙리스트에 질의할 닉네임 입니다.
+ * @param {number} [timeout=3] - timeout 로 지정할 시간입니다. 단위는 초 입니다. 지정하지 않으면 자동으로 3초로 설정됩니다.
+ * @param {function(Error, object):void} callback - 콜백 함수입니다. 첫번째 인자로 Error 가 반환되며, 두번째 인자로 정보가 반환됩니다.
+ * @returns {void}
+ */
 exports.nickname = (nick, timeout, callback) => {
-    query_nick(nick, timeout*1000, callback);
+    if(typeof timeout == 'number' && timeout > 0) {
+        query_nick(nick, timeout*1000, callback);
+    } else {
+        query_nick(nick, timeout*1000, callback);
+    }
 }
 exports.nickname = (nick, callback) => {
     query_nick(nick, 3*1000, callback);
 }
-exports.nick_pro = (nick, timeout, callback) => {
-    return new Promise((resolve, reject) => {
-        query_nick(nick, timeout*1000, (err, res) => {
-            if(err) reject(err);
-            resolve(res);
+
+/**
+ * 블랙리스트 검색 내용을 반환합니다.
+ * @param {string} nick - 블랙리스트에 질의할 닉네임 입니다.
+ * @param {number} [timeout=3] - timeout 로 지정할 시간입니다. 단위는 초 입니다. 지정하지 않으면 자동으로 3초로 설정됩니다.
+ * @return {Promise<Response>} - 응답 데이터가 넘어옵니다.
+ */
+exports.nick_pro = (nick, timeout) => {
+    if(typeof timeout == 'number' && timeout > 0) {
+        return new Promise((resolve, reject) => {
+            query_nick(nick, timeout*1000, (err, res) => {
+                if(err) reject(err);
+                resolve(res);
+            });
         });
-    });
+    } else {
+        return new Promise((resolve, reject) => {
+            query_nick(nick, 3*1000, (err, res) => {
+                if(err) reject(err);
+                resolve(res);
+            });
+        });
+    }
 }
-exports.nick_pro = (nick, callback) => {
+exports.nick_pro = (nick) => {
     return new Promise((resolve, reject) => {
         query_nick(nick, 3*1000, (err, res) => {
             if(err) reject(err);
@@ -185,15 +296,30 @@ exports.nick_pro = (nick, callback) => {
         });
     });
 }
-exports.nickname_pro = (nick, timeout, callback) => {
-    return new Promise((resolve, reject) => {
-        query_nick(nick, timeout*1000, (err, res) => {
-            if(err) reject(err);
-            resolve(res);
+/**
+ * 블랙리스트 검색 내용을 반환합니다.
+ * @param {string} nick - 블랙리스트에 질의할 닉네임 입니다.
+ * @param {number} [timeout=3] - timeout 로 지정할 시간입니다. 단위는 초 입니다. 지정하지 않으면 자동으로 3초로 설정됩니다.
+ * @return {Promise<Response>} - 응답 데이터가 넘어옵니다.
+ */
+exports.nickname_pro = (nick, timeout) => {
+    if(typeof timeout == 'number' && timeout > 0) {
+        return new Promise((resolve, reject) => {
+            query_nick(nick, timeout*1000, (err, res) => {
+                if(err) reject(err);
+                resolve(res);
+            });
         });
-    });
+    } else {
+        return new Promise((resolve, reject) => {
+            query_nick(nick, 3*1000, (err, res) => {
+                if(err) reject(err);
+                resolve(res);
+            });
+        });
+    }
 }
-exports.nickname_pro = (nick, callback) => {
+exports.nickname_pro = (nick) => {
     return new Promise((resolve, reject) => {
         query_nick(nick, 3*1000, (err, res) => {
             if(err) reject(err);
@@ -201,6 +327,14 @@ exports.nickname_pro = (nick, callback) => {
         });
     });
 }
+
+/**
+ * 내부에서 처리용도로 만든 함수입니다.
+ * @private
+ * @param {string} nick - 질의할 닉네임입니다.
+ * @param {number} timeout - timeout 입니다.
+ * @param {function(Error, object)} callback_fun - 콜백 함수 입니다.
+ */
 function query_nick(nick, timeout, callback_fun) {
     if(/[a-zA-Z0-9\_]{4,16}$/.test(nick) == false) {
         callback_fun('not matching nickname ruleset', null);
@@ -238,21 +372,49 @@ function query_nick(nick, timeout, callback_fun) {
 /* nickname query end */
 
 /* nickname to uuid start */
+
+/**
+ * 모장 UUID API 검색 내용을 반환합니다.
+ * @param {string} nick - 모장 API에 질의할 닉네임 입니다.
+ * @param {number} [timeout=3] - timeout 로 지정할 시간입니다. 단위는 초 입니다. 지정하지 않으면 자동으로 3초로 설정됩니다.
+ * @param {function(Error, object):void} callback - 콜백 함수입니다. 첫번째 인자로 Error 가 반환되며, 두번째 인자로 정보가 반환됩니다.
+ * @returns {void}
+ */
 exports.nickname_to_uuid = (nick, timeout, callback) => {
-    nickname_to_uuid(nick, timeout*1000, callback);
+    if(typeof timeout == 'number' && timeout > 0) {
+        nickname_to_uuid(nick, timeout*1000, callback);
+    } else {
+        nickname_to_uuid(nick, 3*1000, callback);
+    }
 }
 exports.nickname_to_uuid = (nick, callback) => {
     nickname_to_uuid(nick, 3*1000, callback);
 }
-exports.nickname_to_uuid_pro = (nick, timeout, callback) => {
-    return new Promise((resolve, reject) => {
-        nickname_to_uuid(nick, timeout*1000, (err, res) => {
-            if(err) reject(err);
-            resolve(res);
+
+/**
+ * 모장 UUID API 검색 내용을 반환합니다.
+ * @param {string} nick - 모장 API에 질의할 닉네임 입니다.
+ * @param {number} [timeout=3] - timeout 로 지정할 시간입니다. 단위는 초 입니다. 지정하지 않으면 자동으로 3초로 설정됩니다.
+ * @return {Promise<Response>} - 응답 데이터가 넘어옵니다.
+ */
+exports.nickname_to_uuid_pro = (nick, timeout) => {
+    if(typeof timeout == 'number' && timeout > 0) {
+        return new Promise((resolve, reject) => {
+            nickname_to_uuid(nick, timeout*1000, (err, res) => {
+                if(err) reject(err);
+                resolve(res);
+            });
         });
-    });
+    } else {
+        return new Promise((resolve, reject) => {
+            nickname_to_uuid(nick, 3*1000, (err, res) => {
+                if(err) reject(err);
+                resolve(res);
+            });
+        });
+    }
 }
-exports.nickname_to_uuid_pro = (nick,  callback) => {
+exports.nickname_to_uuid_pro = (nick) => {
     return new Promise((resolve, reject) => {
         nickname_to_uuid(nick, 3*1000, (err, res) => {
             if(err) reject(err);
@@ -260,6 +422,14 @@ exports.nickname_to_uuid_pro = (nick,  callback) => {
         });
     });
 }
+
+/**
+ * 내부에서 처리용도로 만든 함수입니다.
+ * @private
+ * @param {string} nick - 질의할 닉네임입니다.
+ * @param {number} timeout - timeout 입니다.
+ * @param {function(Error, object)} callback_fun - 콜백 함수 입니다.
+ */
 function nickname_to_uuid(nick, timeout, callback_fun) {
     if(/[a-zA-Z0-9\_]{4,16}$/.test(nick) == false) {
         callback_fun('not matching nickname ruleset', null);

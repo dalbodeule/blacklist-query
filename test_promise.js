@@ -34,7 +34,7 @@ Promise.resolve()
     })
     .then(() => {
         return new Promise((resolve, reject) => {
-            query.uuid_pro('2e45712e3747428094cb1d39fe7ee434')
+            query.uuid_pro('069a79f4-44e9-4726-a5be-fca90e38aaf5')
             .then((result) => {
                 resolve(result);
             })
@@ -57,7 +57,7 @@ Promise.resolve()
     })
     .then(() => {
         return new Promise((resolve, reject) => {
-            query.nick_pro('trusty_people')
+            query.nick_pro('Notch')
             .then((result) => {
                 resolve(result);
             })
@@ -80,7 +80,7 @@ Promise.resolve()
     })
     .then(() => {
         return new Promise((resolve, reject) => {
-            query.nickname_to_uuid_pro('trusty_people')
+            query.nickname_to_uuid_pro('Notch')
             .then((result) => {
                 resolve(result);
             })

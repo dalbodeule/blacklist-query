@@ -15,7 +15,7 @@
     "node": "<6.9.2"
   },
   "main": "main.js",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "scripts": {
     "test": "node test.js --trace-sync-io",
     "testpro": "node test_promise.js --trace-sync-io"
