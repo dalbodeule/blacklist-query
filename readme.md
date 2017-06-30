@@ -25,7 +25,7 @@ let query = require('blacklist-query');
 ```
 ## callback 방식
 
-`blacklist-query` Object 안의 `callback` 변수를 호출하여 사용이 가능합니다.
+`blacklist-query` Object 안의 `callback` Object를 호출하여 사용이 가능합니다.
 
 ### 모든 함수 공통
 
@@ -185,7 +185,9 @@ query.callback.n2u('trusty_people', function(err, res) {
 
 ## Promise 방식
 
-Promise 패턴을 적용 할 경우, 다음과 같이 사용합니다.
+`blacklist-query` Object 안의 `promise` Object를 호출하여 사용이 가능합니다.
+
+`Promise` 패턴을 적용 할 경우, 다음과 같이 사용합니다.
 
 ```javascript
 query.promise.nick('trusty_people')
@@ -199,11 +201,11 @@ query.promise.nick('trusty_people')
 
 `query.promise.ip` 함수, `query.promise.nick` 함수 같은 함수가 Promise 패턴이 적용된 함수입니다.
 
-Promise 에서 사용하지 않는 `callback` 함수만 없애주시면 정상작동합니다.
+`Promise` 에서 사용하지 않는 `callback` 함수만 없애주시면 정상작동합니다.
 
 ## Async/Await 패턴 (ECMAScript 2017)
 
-Async/Await 패턴을 사용하실 경우 Promise 함수를 호출합니다.
+`Async/Await` 패턴을 사용하실 경우 `Promise` 함수를 호출합니다.
 
 ```javascript
 (async() => {
@@ -216,9 +218,9 @@ Async/Await 패턴을 사용하실 경우 Promise 함수를 호출합니다.
 })();
 ```
 
-위와 같은 방식으로 Async/Await 패턴을 적용해주시면 됩니다.
+위와 같은 방식으로 `Async/Await` 패턴을 적용해주시면 됩니다.
 
-단 Node.js 7.5 에서 --harmony flag 를 사용하여야 하며, 7.10.0 이상에서 공식적으로 지원하는 패턴입니다.
+단 `Node.js 7.5` 에서 `--harmony` flag 를 사용하여야 하며, `Node.js 7.10.0` 이상에서 공식적으로 지원하는 패턴입니다.
 
 ## Script Test
 
@@ -244,10 +246,10 @@ Script Test 명령어는 다음과 같습니다.
 ## 업데이트 내역
 
 ### 2.0.0
-구조를 전부 바꾸었습니다. ECMAScript 2017의 async/await 패턴을 공식적으로 지원합니다. 단 Node.js 7.5 에서 --harmony flag 를 사용하여야 하며, 7.10.0 이상에서 공식적으로 지원하는 패턴입니다.
+구조를 전부 바꾸었습니다. ECMAScript 2017의 async/await 패턴을 공식적으로 지원합니다. 단 `Node.js 7.5` 에서 `--harmony` flag 를 사용하여야 하며, `Node.js 7.10.0` 이상에서 공식적으로 지원하는 패턴입니다.
 
 ### 1.3.5
-MC-Blacklist.kr 운영자의 요청에 의해 API 호출 주소가 변경되었습니다.
+`MC-Blacklist.kr` 운영자의 요청에 의해 API 호출 주소가 변경되었습니다.
 
 ### 1.3.4
 실수로 변경못한 readme.md 가 수정되었으며, 그에 따른 업데이트입니다.
