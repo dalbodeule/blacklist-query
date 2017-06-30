@@ -11,7 +11,7 @@ Promise.resolve()
     })
     .then(() => {
         return new Promise((resolve, reject) => {
-            query.ip_pro('127.0.0.1')
+            query.promise.ip('127.0.0.1')
             .then((result) => {
                 resolve(result);
             })
@@ -34,7 +34,7 @@ Promise.resolve()
     })
     .then(() => {
         return new Promise((resolve, reject) => {
-            query.uuid_pro('069a79f4-44e9-4726-a5be-fca90e38aaf5')
+            query.promise.uuid('069a79f4-44e9-4726-a5be-fca90e38aaf5')
             .then((result) => {
                 resolve(result);
             })
@@ -57,7 +57,7 @@ Promise.resolve()
     })
     .then(() => {
         return new Promise((resolve, reject) => {
-            query.nick_pro('Notch')
+            query.promise.nick('Notch')
             .then((result) => {
                 resolve(result);
             })
@@ -80,7 +80,7 @@ Promise.resolve()
     })
     .then(() => {
         return new Promise((resolve, reject) => {
-            query.nickname_to_uuid_pro('Notch')
+            query.promise.n2u('Notch')
             .then((result) => {
                 resolve(result);
             })

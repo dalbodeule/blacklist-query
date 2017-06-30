@@ -25,17 +25,11 @@ let query = require('blacklist-query');
 ```
 ## callback 방식
 
-### ip query
+`blacklist-query` Object 안의 `callback` 변수를 호출하여 사용이 가능합니다.
 
-```javascript
-query.ip(ip address(string)[, timeout(int)], callback(function));
-```
+### 모든 함수 공통
 
-`ip` 인자는 String 형으로 `IPv4` 를 입력합니다.
-
-```javascript
-query.ip('127.0.0.1', callback);
-```
+#### 공통 인자
 
 `timeout` 인자는 선택 인자 입니다. 만약 입력할 경우 timeout 이 지정됩니다.
 
@@ -43,20 +37,38 @@ query.ip('127.0.0.1', callback);
 
 만약 1 으로 지정할 경우, 1초 이내에 응답이 없을 경우 실패로 간주합니다.
 
-```javascript
-query.ip('127.0.0.1', 1, callback);
-```
-
 `callback` 인자는 콜백 처리 함수를 입력합니다.
 
+#### 반환 형태
+
+`status`가 `true` 일 경우 블랙리스트에 등록, `false` 일 경우 블랙리스트에 미등록, `error` 일 경우 블랙리스트 에러로 불러오지 못한 경우이며, body 가 반환됩니다.
+
+`'fail'` 일 경우 Javascript 에러로 인해 검색에 실패한 경우이며, Javascript Error 로그가 반환됩니다.
+
+### ip query
+
+#### 역할 및 설명
+
 ```javascript
-query.ip('127.0.0.1', function(err, res) {
+query.callback.ip(ip address(string)[, timeout(int)], callback(function));
+```
+
+`ip` 인자는 String 형으로 `IPv4` 를 입력합니다.
+
+#### 사용 예시
+
+```javascript
+query.callback.ip('127.0.0.1', callback);
+
+query.callback.ip('127.0.0.1', 1, callback);
+
+query.callback.ip('127.0.0.1', function(err, res) {
     if(err) console.log(err);
     console.log(res);
 });
 ```
 
-반환은 다음과 같이 됩니다.
+#### 반환
 
 ```javascript
 { timeout: 3000 /* timeout 인자 또는 기본값 */,
@@ -68,13 +80,12 @@ query.ip('127.0.0.1', function(err, res) {
 }
 ```
 
-`status`가 `true` 일 경우 블랙리스트에 등록, `false` 일 경우 블랙리스트에 미등록, `error` 일 경우 블랙리스트 에러로 불러오지 못한 경우이며, body 가 반환됩니다.
-`'fail'` 일 경우 블랙리스트 서버의 문제로 검색에 실패한 경우이며, Javascript Error 로그가 반환됩니다.
+### uuid query
 
-#### uuid query
+#### 역할 및 설명
 
 ```javascript
-query.uuid(uuid(string)[, timeout(int)], callback(function));
+query.callback.uuid(uuid(string)[, timeout(int)], callback(function));
 ```
 
 `uuid` 인자는 String 형으로 `UUID` 를 입력합니다.
@@ -82,30 +93,21 @@ query.uuid(uuid(string)[, timeout(int)], callback(function));
 36자로 된 `Full UUID` 또는, 32글자로 된 `UUID`를 입력합니다.
 
 ```javascript
-query.uuid('2e45712e-3747-4280-94cb-1d39fe7ee434', callback); // Full UUID
-query.uuid('2e45712e3747428094cb1d39fe7ee434', callback); // UUID
+query.callback.uuid('2e45712e-3747-4280-94cb-1d39fe7ee434', callback); // Full UUID
+query.callback.uuid('2e45712e3747428094cb1d39fe7ee434', callback); // UUID
 ```
 
-`timeout` 인자는 선택 인자 입니다. 만약 입력할 경우 timeout 가 지정됩니다.
-
-`timeout` 인자를 입력하지 않을 경우 기본 3초로 timeout 가 지정됩니다.
-
-만약 1 으로 지정할 경우, 1초 이내에 응답이 없을 경우 실패로 간주합니다.
+#### 사용 예시
 
 ```javascript
-query.uuid('2e45712e3747428094cb1d39fe7ee434', 1, callback);
-```
+query.callback.uuid('2e45712e3747428094cb1d39fe7ee434', 1, callback);
 
-`callback` 인자는 콜백 처리 함수를 입력합니다.
-
-```javascript
-query.uuid('2e45712e3747428094cb1d39fe7ee434', function(err, res) {
+query.callback.uuid('2e45712e3747428094cb1d39fe7ee434', function(err, res) {
     if(err) console.log(err);
     console.log(res);
 });
 ```
-
-반환은 다음과 같이 됩니다.
+#### 반환
 
 ```javascript
 { timeout: 3000 /* timeout 인자 또는 기본값 */,
@@ -115,43 +117,28 @@ query.uuid('2e45712e3747428094cb1d39fe7ee434', function(err, res) {
 }
 ```
 
-`status`가 `true` 일 경우 블랙리스트에 등록, `false` 일 경우 블랙리스트에 미등록, `error` 일 경우 블랙리스트 에러로 불러오지 못한 경우이며, body 가 반환됩니다.
-`'fail'` 일 경우 블랙리스트 서버의 문제로 검색에 실패한 경우이며, Javascript Error 로그가 반환됩니다.
-
-결과가 `true` 일 경우 블랙리스트에 등록, `false` 일 경우 블랙리스트에 미등록, `'fail'` 일 경우 블랙리스트 서버의 문제로 검색에 실패한 경우입니다.
-
 ### nickname query
 
+#### 역할 및 설명
+
 ```javascript
-query.nickname(nickname(string)[, timeout(int)], callback(function));
+query.callback.nick(nickname(string)[, timeout(int)], callback(function));
 ```
 
 `nickname` 인자는 String 형으로 `마인크래프트 닉네임` 을 입력합니다.
 
-```javascript
-query.ip('127.0.0.1', callback);
-```
-
-`timeout` 인자는 선택 인자 입니다. 만약 입력할 경우 timeout 가 지정됩니다.
-
-`timeout` 인자를 입력하지 않을 경우 기본 3초로 timeout 가 지정됩니다.
-
-만약 1 으로 지정할 경우, 1초 이내에 응답이 없을 경우 실패로 간주합니다.
+#### 사용 예시
 
 ```javascript
-query.ip('127.0.0.1', 1, callback);
-```
+query.callback.nick('trusty_people', 1, callback);
 
-`callback` 인자는 콜백 처리 함수를 입력합니다.
-
-```javascript
-query.ip('127.0.0.1', function(err, res) {
+query.callback.nick('trusty_people', function(err, res) {
     if(err) console.log(err);
     console.log(res);
 });
 ```
 
-반환은 다음과 같이 됩니다.
+#### 반환
 
 ```javascript
 { timeout: 3000 /* timeout 인자 또는 기본값 */,
@@ -161,43 +148,30 @@ query.ip('127.0.0.1', function(err, res) {
 }
 ```
 
-`status`가 `true` 일 경우 블랙리스트에 등록, `false` 일 경우 블랙리스트에 미등록, `error` 일 경우 블랙리스트 에러로 불러오지 못한 경우이며, body 가 반환됩니다.
-`'fail'` 일 경우 블랙리스트 서버의 문제로 검색에 실패한 경우이며, Javascript Error 로그가 반환됩니다.
-
 ### nickname to uuid
 
-`마인크래프트 닉네임` 을 `UUID` 로 변환하고 싶을 경우 `nickname_to_uuid` 함수를 사용합니다.
+#### 역할 및 설명
+
+`마인크래프트 닉네임` 을 `UUID` 로 변환하고 싶을 경우 `n2u` 함수를 사용합니다.
 
 ```javascript
-query.nickname_to_uuid(nickname(string)[, timeout(int)], callback(function));
+query.callback.n2u(nickname(string)[, timeout(int)], callback(function));
 ```
 
 `nickname` 인자는 String 형으로 `마인크래프트 닉네임` 를 입력합니다.
 
-```javascript
-query.nickname_to_uuid('trusty_people', callback);
-```
-
-`timeout` 인자는 선택 인자 입니다. 만약 입력할 경우 timeout 이 지정됩니다.
-
-`timeout` 인자를 입력하지 않을 경우 기본 3초로 timeout 이 지정됩니다.
-
-만약 1 으로 지정할 경우, 1초 이내에 응답이 없을 경우 실패로 간주합니다.
+#### 예시
 
 ```javascript
-query.nickname_to_uuid('trusty_people', 1, callback);
-```
+query.callback.n2u('trusty_people', 1, callback);
 
-`callback` 인자는 콜백 처리 함수를 입력합니다.
-
-```javascript
-query.nickname_to_uuid('trusty_people', function(err, res) {
+query.callback.n2u('trusty_people', function(err, res) {
     if(err) console.log(err);
     console.log(res);
 });
 ```
 
-반환은 다음과 같이 됩니다.
+#### 반환
 
 ```javascript
 { timeout: 3000 /* timeout 인자 또는 기본값 */,
@@ -207,14 +181,14 @@ query.nickname_to_uuid('trusty_people', function(err, res) {
 ```
 
 `result` 가 `'success'` 일 경우 정품 유저이며, `response` 에 `UUID`가 담깁니다. `result` 가 `'fail'` 일 경우 등록되지 않은 닉네임입니다.
-`result` 가 `'error'` 일 경우 API 서버의 문제로 검색에 실패한 경우이며, Javascript Error 로그가 반환됩니다.\
+`result` 가 `'error'` 일 경우 API 서버의 문제로 검색에 실패한 경우이며, Javascript Error 로그가 반환됩니다.
 
-## Promise 패턴
+## Promise 방식
 
 Promise 패턴을 적용 할 경우, 다음과 같이 사용합니다.
 
 ```javascript
-query.nick_pro('trusty_people')
+query.promise.nick('trusty_people')
     .then((result) => {
         resolve(result);
     })
@@ -223,11 +197,7 @@ query.nick_pro('trusty_people')
     });
 ```
 
-Promise 패턴이 적용된 함수는 _pro 가 붙은 함수입니다.
-
-query.nick_pro, query.uuid_pro, query.nick_pro, query.nickname_pro, query.nickname_to_uuid_pro 와 같은 함수입니다.
-
-리턴값은 모두 같습니다.
+`query.promise.ip` 함수, `query.promise.nick` 함수 같은 함수가 Promise 패턴이 적용된 함수입니다.
 
 ## Script Test
 
@@ -251,6 +221,9 @@ Script Test 명령어는 다음과 같습니다.
 ```
 
 ## 업데이트 내역
+
+### 2.0.0
+구조를 전부 바꾸었습니다. ECMAScript 2017의 async/await 패턴을 공식적으로 지원합니다. 단 Node.js 7.5 에서 --harmony flag 를 사용하여야 하며, 7.10.0 이상에서 공식적으로 지원하는 패턴입니다.
 
 ### 1.3.5
 MC-Blacklist.kr 운영자의 요청에 의해 API 호출 주소가 변경되었습니다.
@@ -326,4 +299,4 @@ readme.md 파일의 가독성을 조금 높히고, 일부 누락된 부분을 �
 최초 버전
 
 ## 제작자
-미쁨_trusty(trusty_people)[npmjs](https://www.npmjs.com/~trusty_people) [github](https://github.com/trustypeople)
+볕뉘(small_sunshine)[npmjs](https://www.npmjs.com/~trusty_people) [github](https://github.com/small_sunshines)
