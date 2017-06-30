@@ -10,34 +10,36 @@ module.exports = (nick, timeout, callback_fun) => {
     let query = require('./modules'), async = require('async');
     if(/[a-zA-Z0-9\_]{4,16}$/.test(nick) == false) {
         callback_fun('not matching nickname ruleset', null);
-    }
-    let servers = {
-        'mc-blacklist': {
-            url: 'http://api.mc-blacklist.kr/API/nickname/'+nick,
-            success: (body, callback) => {
-                let res = JSON.parse(body)['blacklist'];
-                let result = {
-                    status: false
-                };
-                switch(res) {
-                    case true: result.status = true; break;
-                    case false:  result.status = false; break;
-                    default: result.status = 'error'; break;
+        return;
+    } else {
+        let servers = {
+            'mc-blacklist': {
+                url: 'http://api.mc-blacklist.kr/API/nickname/'+nick,
+                success: (body, callback) => {
+                    let res = JSON.parse(body)['blacklist'];
+                    let result = {
+                        status: false
+                    };
+                    switch(res) {
+                        case true: result.status = true; break;
+                        case false:  result.status = false; break;
+                        default: 
+                            result.status = 'error';
+                            result.error = body;
+                            break;
+                    }
+                    callback(null, result);
                 }
-                if(result.status == 'error') {
-                    result.error = body;
-                }
-                callback(null, result);
             }
         }
+        async.mapValues(servers, (value, server, callback) => {
+            query(value.url, timeout, callback, value.success, value.error);
+        }, (err, res) => {
+            let result = {
+                'timeout': timeout, 'query': nick,
+                'response': res
+            };
+            callback_fun(err, result);
+        });
     }
-    async.mapValues(servers, (value, server, callback) => {
-        query(value.url, timeout, callback, value.success, value.error);
-    }, (err, res) => {
-        let result = {
-            'timeout': timeout, 'query': nick,
-            'response': res
-        };
-        callback_fun(err, result);
-    });
 };

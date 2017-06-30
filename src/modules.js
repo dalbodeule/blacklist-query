@@ -15,7 +15,7 @@ module.exports = (url, timeout, callback, success_fun) => {
             success_fun(body, callback);
         } else {
             let result = {
-                status: 'fail', error: err
+                status: 'fail', error: err, body
             };
             callback(null, result);
         }

@@ -1,5 +1,5 @@
 "use strict";
-global.version = 'V2.0.0';
+global.version = 'V2.0.1';
 module.exports = {
     /**
      * callback 함수들이 모여있습니다.

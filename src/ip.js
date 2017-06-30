@@ -10,51 +10,52 @@ module.exports = (ip, timeout, callback_fun) => {
     let query = require('./modules'), async = require('async');
     if(/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/.test(ip) == false) {
         callback_fun('not matching ip ruleset', null);
-    }
-    let servers = {
-        /*'k-spam': {
-            url: 'https://kspam.swiftnode.cloud/mcbanip/community.php?ip='+ip,
-            success: (body, callback) => {
-                let result = {
-                    status: false
-                };
-                switch(body) {
-                    case 'true': result.status = true; break;
-                    case 'false':  result.status = false; break;
-                    default: result.status = 'error'; break;
+    } else {
+        let servers = {
+            /*'k-spam': {
+                url: 'https://kspam.swiftnode.cloud/mcbanip/community.php?ip='+ip,
+                success: (body, callback) => {
+                    let result = {
+                        status: false
+                    };
+                    switch(body) {
+                        case 'true': result.status = true; break;
+                        case 'false':  result.status = false; break;
+                        default: result.status = 'error'; break;
+                    }
+                    if(result.status == 'error') {
+                        result.error = body;
+                    }
+                    callback(null, result);
                 }
-                if(result.status == 'error') {
-                    result.error = body;
+            },*/
+            'mc-blacklist': {
+                url: 'http://api.mc-blacklist.kr/API/ip/'+ip,
+                success: (body, callback) => {
+                    let res = JSON.parse(body)['blacklist'];
+                    let result = {
+                        status: false
+                    };
+                    switch(res) {
+                        case true: result.status = true; break;
+                        case false:  result.status = false; break;
+                        default: 
+                            result.status = 'error';
+                            result.error = body;
+                            break;
+                    }
+                    callback(null, result);
                 }
-                callback(null, result);
-            }
-        },*/
-        'mc-blacklist': {
-            url: 'http://api.mc-blacklist.kr/API/ip/'+ip,
-            success: (body, callback) => {
-                let res = JSON.parse(body)['blacklist'];
-                let result = {
-                    status: false
-                };
-                switch(res) {
-                    case true: result.status = true; break;
-                    case false:  result.status = false; break;
-                    default: result.status = 'error'; break;
-                }
-                if(result.status == 'error') {
-                    result.error = body;
-                }
-                callback(null, result);
             }
         }
+        async.mapValues(servers, (value, server, callback) => {
+            query(value.url, timeout, callback, value.success);
+        }, (err, res) => {
+            let result = {
+                'timeout': timeout, 'query': ip,
+                'response': res
+            };
+            callback_fun(err, result);
+        });
     }
-    async.mapValues(servers, (value, server, callback) => {
-        query(value.url, timeout, callback, value.success);
-    }, (err, res) => {
-        let result = {
-            'timeout': timeout, 'query': ip,
-            'response': res
-        };
-        callback_fun(err, result);
-    });
 };
