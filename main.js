@@ -1,5 +1,5 @@
 'use strict';
-let version = 'V1.3.4'
+let version = 'V1.3.5'
 let async = require('async'), request = require('request');
 
 let query = (url, timeout, callback, success_fun, fail_fun) => {
@@ -98,7 +98,7 @@ function query_ip(ip, timeout, callback_fun) {
             }
         },*/
         'mc-blacklist': {
-            url: 'https://mc-blacklist.kr/API/ip/'+ip,
+            url: 'http://api.mc-blacklist.kr/API/ip/'+ip,
             success: (body, callback) => {
                 let res = JSON.parse(body)['blacklist'];
                 let result = {
@@ -198,7 +198,7 @@ function query_uuid(uuid, timeout, callback_fun) {
     }
     let servers = {
         'mc-blacklist': {
-            url: 'https://mc-blacklist.kr/API/uuid/'+uuid,
+            url: 'http://api.mc-blacklist.kr/API/uuid/'+uuid,
             success: (body, callback) => {
                 let res = JSON.parse(body)['blacklist'];
                 let result = {
@@ -341,7 +341,7 @@ function query_nick(nick, timeout, callback_fun) {
     }
     let servers = {
         'mc-blacklist': {
-            url: 'https://mc-blacklist.kr/API/nickname/'+nick,
+            url: 'http://api.mc-blacklist.kr/API/nickname/'+nick,
             success: (body, callback) => {
                 let res = JSON.parse(body)['blacklist'];
                 let result = {
