@@ -199,6 +199,27 @@ query.promise.nick('trusty_people')
 
 `query.promise.ip` 함수, `query.promise.nick` 함수 같은 함수가 Promise 패턴이 적용된 함수입니다.
 
+Promise 에서 사용하지 않는 `callback` 함수만 없애주시면 정상작동합니다.
+
+## Async/Await 패턴 (ECMAScript 2017)
+
+Async/Await 패턴을 사용하실 경우 Promise 함수를 호출합니다.
+
+```javascript
+(async() => {
+    try {
+        let result = query.promise.nick('trusty_people');
+        console.log(result);
+    } catch(e) {
+        console.error(e);
+    }
+})();
+```
+
+위와 같은 방식으로 Async/Await 패턴을 적용해주시면 됩니다.
+
+단 Node.js 7.5 에서 --harmony flag 를 사용하여야 하며, 7.10.0 이상에서 공식적으로 지원하는 패턴입니다.
+
 ## Script Test
 
 Script Test 명령어는 다음과 같습니다.
