@@ -1,6 +1,6 @@
 {
   "name": "blacklist-query",
-  "author": "trusty_people <jioo0224@naver.com>",
+  "author": "small_sunshine <jioo0224@naver.com>",
   "files": [
     "main.js",
     "test.js",
@@ -8,14 +8,14 @@
     "readme.md"
   ],
   "dependencies": {
-    "async": "^2.1.4",
-    "request": "^2.79.0"
+    "async": "^2.6.0",
+    "request": "^2.87.0"
   },
   "engines": {
     "node": "<6.9.2"
   },
   "main": "main.js",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "scripts": {
     "test": "node test.js --trace-sync-io",
     "testpro": "node test_promise.js --trace-sync-io"
@@ -28,10 +28,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/small-sunshines/blacklist-query.git"
+    "url": "https://git.mori.space/small-sunshine/blacklist-querygit"
   },
   "bugs": {
-    "url": "https://github.com/small-sunshines/blacklist-query/issues"
+    "url": "https://git.mori.space/small-sunshine/blacklist-query/issues"
   },
-  "hoempage": "https://github.com/small-sunshines/blacklist-query#readme"
+  "hoempage": "https://git.mori.space/small-sunshine/blacklist-query#readme"
 }
